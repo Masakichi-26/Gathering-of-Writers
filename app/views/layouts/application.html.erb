@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Practice2</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+  </head>
+
+  <body>
+    <div class="ui thin visible sidebar inverted vertical menu fixed left"
+      style="background: #332a42;">
+      <%= link_to '<i class="icon home"></i>Home'.html_safe, root_path, :class=>"item" %>
+      <%= link_to '<i class="icon edit"></i>Articles'.html_safe, articles_path, :class=>"item" %>
+      <% if logged_in? %>
+        <%= link_to '<i class="icon address card"></i>Profile'.html_safe, current_user, :class=>"item"%>
+        <%= link_to '<i class="icon user circle"></i>Friends'.html_safe, friends_index_path,
+            :class=>"item" %>
+        <%= link_to '<i class="icon sign out alternate"></i>Logout'.html_safe, logout_path,
+            method: :delete, :class=>"item",
+            data: {confirm: "Are you sure you would like to logout?"} %>
+        <div class="item">
+          <div class="ui message yellow">
+              Logged in as <span class="user-info"><%= current_user.username %></span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="header">
+            <%= link_to 'Groups', groups_path,
+                :class=>"item" %>
+          </div>
+          <div class="menu">
+            
+          </div>
+        </div>
+      <% else %>
+        <%= link_to '<i class="icon user plus"></i>Sign Up'.html_safe, users_new_path, :class=>"item" %>
+        <%= link_to '<i class="icon sign in alternate"></i>Login'.html_safe, login_path, :class=>"item" %>
+      <% end %>
+      
+    </div>
+
+    <div class="ui container pusher">
+      <div class="ui equal width grid">
+        <div class="left floated ten wide column">
+          <div class="column">
+            <div class="top-padding">
+              <% flash.each do |key, value| %>
+                <%= content_tag :div, value, class: "ui #{key} message" %>
+              <% end %>
+
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,7 @@
+<h1>Home Page</h1>
+<% if logged_in? %>
+    <h3>Welcome, <span class="user-info"><%= current_user.username %></span></h3>
+<% end %>
+<p>This is a website where you can make articles and comment on them. It's a work in progress.</p>
+
+

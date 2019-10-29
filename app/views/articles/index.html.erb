@@ -1,0 +1,22 @@
+<h1>
+    Article Listing (<%= @articles.length %>)
+    <% if logged_in? %>
+        <span class="align-right">
+            <%= button_to 'New', articles_new_path, method: :get, :class=>"ui button green",
+                params: {action: 'create'} %>
+        </span>
+    <% end %>
+</h1>
+
+<ul>
+    <div class="ui divider"></div>
+    <% @articles.each do |a| %>
+        <li>
+            <%= link_to(a.title, article_path(a.id)) %>
+            <span class="align-right">
+                <%= a.user.username %>
+            </span>
+        </li>
+        <div class="ui divider"></div>
+    <% end %>
+</ul>

@@ -1,0 +1,41 @@
+<h1><span class="user-info"><%= @user.username %></span>'s Page
+    <% if logged_in? && current_user == @user %>
+        <span class="align-right">
+            <%= button_to "Edit Profile", user_edit_path(@user), :class=>"ui button blue",
+                method: :get %>
+        </span>
+    <% end %>
+</h1>
+
+<div class="ui piled segment">
+  <h4 class="ui header">Bio</h4>
+    <p><%= simple_format(@user.bio) %></p>
+</div>
+
+<div class="ui divider"></div>
+
+<div>
+    <% if logged_in? %>
+        <% if current_user != @user && !@pending && !@received && !@friend %>
+            <%= button_to "Send friend request", friend_requests_path, :class=>"ui button green",
+                params: {friend_id: @user.id} %>
+        <% elsif current_user != @user && @pending && !@received && !@friend %>
+            <%= button_to "Cancel friend request", friend_request_path(@friend_request), :class=>"ui button gray",
+                method: :delete, data: {confirm: "Are you sure you would like to cancel this friend request? You can send a request again after canceling."} %>
+        <% elsif current_user != @user && !@pending && @received && !@friend %>
+            <%= button_to "Accept friend request", friend_request_path(@friend_request), :class=>"ui button blue",
+                method: :patch %>
+            <%= button_to "Decline friend request", friend_request_path(@friend_request), :class=>"ui button red",
+                method: :delete, data: {confirm: "Are you sure you would like to decline this friend request? This action cannot be undone."} %>
+        <% elsif current_user != @user && !@pending && !@received && @friend %>
+            <%= button_to "Remove friend", friends_destroy_path, :class=>"ui button red",
+                method: :delete, params: {user_id: @user.id},
+                data: {confirm: "Are you sure you would like to remove this user from your friends? This action cannot be undone."} %>
+        <% end %>
+    <% end %>
+</div>
+
+
+
+
+

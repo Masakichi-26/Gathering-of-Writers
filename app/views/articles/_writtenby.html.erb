@@ -1,0 +1,8 @@
+<div class="ui segment">
+    Written by <%= link_to @user.username, @user %> on <%= @article.created_at.strftime("%B %-d, %Y") %>
+    <div>
+        <% if @article.created_at != @article.updated_at %>
+            Last updated on <%= @article.updated_at.strftime("%B %-d, %Y") %>
+        <% end %>
+    </div>
+</div>

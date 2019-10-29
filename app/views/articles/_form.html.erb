@@ -1,0 +1,36 @@
+<% if @article.errors.any? %>
+    <div class="ui error message">
+        <ul>
+            <% @article.errors.full_messages.each do |e| %>
+                <li><%= e %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+
+<%= form_for @article do |form| %>
+    <div class="ui form">
+        <div class="field">
+            <%= form.label :title %>
+            <%= form.text_field :title, placeholder: "Enter your title here" %>
+        </div>
+
+        <div class="field">
+            <%= form.label :content %>
+            <%= form.text_area :content, {size: "60x10", placeholder: "Enter the contents of your article here"} %>
+        </div>
+
+        <% if params[:action] == 'edit' %>
+            <%= form.submit 'Update', :class=>"ui blue button" %>
+        <% else %>
+            <%= form.submit 'Create', :class=>"ui green button" %>
+        <% end %>
+    </div>
+<% end %>
+
+<% if !@article.new_record? %>
+    <br>
+    <%= link_to @article do %>
+        <button class="ui gray button">Go back</button>
+    <% end %>
+<% end %>

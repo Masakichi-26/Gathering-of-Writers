@@ -1,0 +1,40 @@
+<h1>Pending Friend Requests
+    (<%= @outgoing.length %>)
+</h1>
+<div class="ui divider"></div>
+<ul>
+    <% @outgoing.each do |out| %>
+        <li>
+            <%= link_to out.friend.username, out.friend %>
+            <span class="align-right bottom-adjustment">
+                <%= button_to "Cancel", friend_request_path(out), :class=>"ui button gray",
+                    method: :delete, data: {confirm: "Are you sure you would like to cancel this friend request? You can send a request again after canceling."} %>
+            </span>
+        </li>
+        <div class="ui divider"></div>
+    <% end %>
+</ul>
+
+
+
+<h1>Received Friend Requests
+    (<%= @incoming.length %>)
+</h1>
+<div class="ui divider"></div>
+<ul>
+    <% @incoming.each do |inc| %>
+        <li>
+            <%= link_to inc.user.username, inc.user %>
+            <span class="align-right bottom-adjustment">
+                <%= button_to "Decline", friend_request_path(inc), :class=>"ui button red",
+                    method: :delete, data: {confirm: "Are you sure you would like to decline this friend request? This action cannot be undone."} %>
+            </span>
+            <span class="align-right bottom-adjustment">
+                <%= button_to "Accept", friend_request_path(inc), :class=>"ui button blue",
+                    method: :patch %>
+            </span>
+        </li>
+        <div class="ui divider"></div>
+    <% end %>
+</ul>
+

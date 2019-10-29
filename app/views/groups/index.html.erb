@@ -1,0 +1,21 @@
+<h1><span class="user-info"><%= current_user.username %></span>'s Groups
+    <% if logged_in? %>
+        <span class="align-right">
+            <%= button_to "New Group", groups_new_path, :class=>"ui button green",
+                method: :get %>
+        </span>
+    <% end %>
+</h1>
+
+<ul>
+    <% if @groups %>
+        <% @groups.each do |g| %>
+            <div class="ui segment">
+            <%= link_to g.name, group_articles_path(g.name, group_id: g.id) %>
+            <span class="align-right">
+                Creator: <%= link_to g.creator.username, g.creator %>
+            </span>
+            </div>
+        <% end %>
+    <% end %>
+</ul>

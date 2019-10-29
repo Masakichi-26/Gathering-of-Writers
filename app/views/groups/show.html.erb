@@ -1,0 +1,52 @@
+<h1>
+    <%= @group.name %>
+    <span class="align-right">
+        <%= button_to 'New', group_articles_new_path, method: :get, :class=>"ui button green",
+            params: {action: 'create'} %>
+    </span>
+    <% if is_creator?(@group) %>
+        <span class="align-right">
+            <%= button_to 'Edit', group_edit_path, method: :get, :class=>"ui button blue",
+                params: {group_id: @group.id}  %>
+        </span>
+    <% end %>
+</h1>
+
+<p>This group was created by <%= link_to @group.creator.username, @group.creator %> on <%= @group.created_at.strftime("%B %-d, %Y") %></p>
+
+<div class="ui piled segment">
+  <h4 class="ui header">Description</h4>
+    <p><%= simple_format(@group.description) %></p>
+</div>
+<div class="ui divider"></div>
+
+<h3><%= @group.item_name %> List</h3>
+
+<ul>
+    <div class="ui divider"></div>
+    <% if @articles %>
+        <% @articles.each do |a| %>
+            <li>
+                <%= link_to(a.title, group_article_path(@group.name, a.title)) %>
+                <span class="align-right">
+                    <%= link_to a.user.username, a.user %>
+                </span>
+            </li>
+            <div class="ui divider"></div>
+        <% end %>
+    <% end %>
+</ul>
+
+<div class="ui divider"></div>
+
+<h3>Group Members</h3>
+
+<ul>
+    <div class="ui divider"></div>
+    <% @group.users.each do |member| %>
+        <li>
+            <%= link_to member.username, member %>
+        </li>
+        <div class="ui divider"></div>
+    <% end %>
+</ul>

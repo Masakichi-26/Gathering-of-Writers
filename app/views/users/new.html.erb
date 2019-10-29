@@ -1,0 +1,28 @@
+<h1>User Sign Up</h1>
+<p>Enter all fields below and click the "Sign Up" button to proceed.</p>
+
+<%= render 'shared/errors', obj: @user %>
+
+<%= form_for(@user, url: users_new_path) do |f| %>
+    <div class="ui form">
+        <div class="field">
+            <%= f.label :email %>
+            <%= f.email_field :email %>
+        </div>
+        <div class="field">
+            <%= f.label :username %>
+            <%= f.text_field :username %>
+        </div>
+        <div class="field">
+            <%= f.label :password %>
+            <%= f.password_field :password %>
+        </div>
+        <div class="field">
+            <%= f.label :password_confirmation %>
+            <%= f.password_field :password_confirmation %>
+        </div>
+        <div class="field">
+            <%= f.button 'Sign Up', :class=>"ui green button" %>
+        </div>
+    </div>
+<% end %>

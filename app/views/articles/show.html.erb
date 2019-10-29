@@ -1,0 +1,46 @@
+<h2><%= @article.title %></h2>
+
+<%= render partial: 'writtenby' %>
+
+<div class="article-body"><%= simple_format(@article.content) %></div>
+
+<div class="ui divider"></div>
+<div>
+    Comments
+    <ul>
+        <% if @comments.any? %>
+            <% @comments.each do |comment| %>
+                <li>
+                    <%= comment.content %>
+                     – <%= link_to comment.user.username, user_path(comment.user) %>
+                    <% if can_edit_delete?(comment.user) %>
+                        (
+                        <%= link_to 'Edit', comment_edit_path(comment, comment_id: comment.id) %>
+                        | 
+                        <%= link_to 'Delete', comment_edit_path(comment, comment_id: comment.id), method: :delete,
+                            article_id: @article.id,
+                            data: { confirm: 'Are you sure you want to delete this comment? This action cannot be undone.' } %>
+                        )
+                    <% end %>
+                </li>
+            <% end %>
+        <% else %>
+            <p>No comments yet. Why don't you be the first to comment?</p>
+        <% end %>
+    </ul>
+</div>
+
+
+<div class="ui divider"></div>
+
+<%= render partial: 'comments/form' %>
+
+<% if can_edit_delete?(@user) %>
+    <div class="ui divider"></div>
+    <%= button_to "Edit this article", article_edit_path(@article.id),
+        :class=>"ui button blue", method: :get, params: {action: 'edit'} %>
+    <br>
+    <%= button_to "Delete this article", article_path(@article.id),
+        :class=>"ui button red", method: :delete,
+        data: { confirm: 'Are you sure you want to delete this article? This action cannot be undone.' } %>
+<% end %>

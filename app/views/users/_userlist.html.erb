@@ -1,0 +1,11 @@
+<ul>
+<% if obj %>
+    <div class="ui divider"></div>
+    <% obj.each do |o| %>
+        <li>
+            <%= link_to o.username, o %>
+        </li>
+        <div class="ui divider"></div>
+    <% end %>
+<% end %>
+</ul>

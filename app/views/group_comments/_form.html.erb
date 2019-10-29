@@ -1,0 +1,24 @@
+<div>
+    <%= @comment.new_record? ? 'Add a comment' : 'Update your comment' %>
+    <%= form_for(@comment, url: group_comments_path(@article.group.name, @article.title, 
+        group_article_id: @article.id, group_comment_id: @comment.id)) do |c| %>
+        <div class="ui form">
+            <div class="field">
+                <%= c.text_area :content, {size: "60x2", required: "required"} %>
+            </div>
+
+            <% if @comment.new_record? %>
+                <%= c.button 'Add comment', :class=>"ui green button" %>
+            <% else %>
+                <%= c.button 'Update comment', :class=>"ui blue button" %>
+            <% end %>
+        </div>
+    <% end %>
+
+    <% if !@comment.new_record? %>
+        <br>
+        <%= link_to group_article_path(@article.group.name, @article.title) do %>
+            <button class="ui gray button">Go back</button>
+        <% end %>
+    <% end %>
+</div>

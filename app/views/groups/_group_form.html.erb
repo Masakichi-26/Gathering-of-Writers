@@ -1,0 +1,39 @@
+<%= form_for @group do |g| %>
+    <div class="ui form">
+        <div class="field">
+            <%= g.label :name %>
+            <%= g.text_field :name, :placeholder=>"Give your group an easily recognizable name." %>
+        </div>
+        <div class="field">
+            <%= g.label :description %>
+            <%= g.text_area :description, :size=>"60x3", :placeholder=>"Let others know what your group is about." %>
+        </div>
+        <div class="field">
+            <%= g.label :item_name, 'Counter for posts' %>
+            <p>The term used to refer to posts made in the group. The default is "Article".</p>
+            <%= g.text_field :item_name, :value=>"Article", :placeholder=>'If blank, this will default to "Article"' %>
+        </div>
+
+        <br>
+
+        <div class="field">
+            <%= g.label :users, 'Friends to Include' %>
+            <div class="ui divider"></div>
+            <% if @friends %>
+                <% @friends.each do |f| %>
+                    <div class="ui toggle checkbox">
+                        <%= check_box_tag 'friends[]', f.username %>
+                        <label><%= f.username %></label>
+                    </div>
+                    <div class="ui divider"></div>
+                <% end %>
+            <% end %>
+        </div>
+        
+        <br>
+
+        <div class="field">
+            <%= g.button "Create Group", :class=>"ui button green" %>
+        </div>
+    </div>
+<% end %>
