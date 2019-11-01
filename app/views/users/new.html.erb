@@ -3,7 +3,7 @@
 
 <%= render 'shared/errors', obj: @user %>
 
-<%= form_for(@user, url: users_new_path) do |f| %>
+<%= form_for(@user) do |f| %>
     <div class="ui form">
         <div class="field">
             <%= f.label :email %>

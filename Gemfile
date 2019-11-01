@@ -38,6 +38,7 @@ gem 'semantic-ui-sass'
 gem 'best_in_place', '~> 3.1.1', github: 'bernat/best_in_place'
 gem 'jquery-rails'
 gem "pundit"
+gem "letter_opener", :group => :development
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

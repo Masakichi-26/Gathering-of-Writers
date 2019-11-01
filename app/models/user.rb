@@ -1,6 +1,24 @@
 class User < ApplicationRecord
+    before_create :confirmation_token
+
     validates :email, :username, presence: true, uniqueness: { case_sensitive: false }
+    validates :email, format: {with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/ }
+    validates :username, format: {with: /\A[a-zA-Z]+[a-zA-Z0-9'_.]*\z/ }
+
+    validates :password,
+        presence: true,
+        length: {minimum: 6},
+        confirmation: true,
+        on: :create
+
+    validates :password,
+        allow_nil: true,
+        length: {minimum: 6},
+        confirmation: true,
+        on: :update
+    
     has_secure_password
+
     has_many :articles
     has_many :comments
     has_many :friend_requests, dependent: :destroy
@@ -29,6 +47,21 @@ class User < ApplicationRecord
 
     def self.matches(field_name, param)
         where("#{field_name} like ?", "%#{param}%")
+    end
+
+    def email_activate
+        self.email_confirmed = true
+        self.confirm_token = nil
+        save!(:validate => false)
+    end
+
+
+private
+
+    def confirmation_token
+        if self.confirm_token.blank?
+            self.confirm_token = SecureRandom.urlsafe_base64.to_s
+        end
     end
 
 end

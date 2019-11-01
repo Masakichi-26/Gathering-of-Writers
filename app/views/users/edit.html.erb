@@ -1,4 +1,6 @@
-<h1>Edit Profile</h1>
+<h1>Edit Profile
+    <%= render 'shared/back_button', path: @user %>
+</h1>
 <p>Make any necessary changes and save them here.</p>
 
 <% if @user.errors.any? %>
@@ -11,12 +13,11 @@
     </div>
 <% end %>
 
-<%= form_for(@user, url: user_edit_path(@user.id)) do |f| %>
+<h4>Email</h4>
+<p>　<%= @user.email %></p><br>
+
+<%= form_for(@user) do |f| %>
     <div class="ui form">
-        <div class="field">
-            <%= f.label :email %>
-            <%= f.email_field :email %>
-        </div>
         <div class="field">
             <%= f.label :username %>
             <%= f.text_field :username %>
@@ -26,20 +27,13 @@
             <%= f.text_area :bio, {size: "60x10", placeholder: "Tell everyone a little about yourself!"} %>
         </div>
         <div class="field">
-            <%= f.label :password %>
-            <%= f.password_field :password %>
-        </div>
-        <div class="field">
-            <%= f.label :password_confirmation %>
-            <%= f.password_field :password_confirmation %>
-        </div>
-        <div class="field">
             <%= f.button 'Save Changes', :class=>"ui blue button" %>
         </div>
     </div>
 <% end %>
-
 <br>
-<%= link_to @user do %>
-    <button class="ui gray button">Go back</button>
-<% end %>
+
+<h3>Manage Password</h3>
+<div class="ui divider"></div>
+<%= button_to "Change Password", change_password_user_path(@user), :class=>"ui button blue",
+    method: :get %>

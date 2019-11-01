@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Greetings, <%= @user.username %></h1>
+    <p>
+      Thank you for registering to Gathering of Writers.
+      In order to confirm your registration, please follow the URL below.<br>
+    </p>
+    <p>
+      <%= confirm_email_user_url(@user.confirm_token) %>
+    </p>
+    <p>We look forward to seeing you on the site soon.<br></p>
+    <p>Sincerely,<br>Gathering of Writers</p>
+  </body>
+</html>

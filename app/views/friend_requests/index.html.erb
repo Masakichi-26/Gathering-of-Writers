@@ -1,6 +1,9 @@
-<h1>Pending Friend Requests
+<h2>Pending Friend Requests
     (<%= @outgoing.length %>)
-</h1>
+
+    <%= render 'shared/back_button', path: friends_index_path %>
+
+</h2>
 <div class="ui divider"></div>
 <ul>
     <% @outgoing.each do |out| %>
@@ -17,9 +20,9 @@
 
 
 
-<h1>Received Friend Requests
+<h2>Received Friend Requests
     (<%= @incoming.length %>)
-</h1>
+</h2>
 <div class="ui divider"></div>
 <ul>
     <% @incoming.each do |inc| %>

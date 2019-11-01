@@ -1,3 +1,20 @@
-<h3>Edit your comment</h3>
+<h3>Edit your comment
+    <%= render 'shared/back_button', path: group_article_path(@group, @article) %>
+</h3>
 
-<%= render partial: 'group_comments/form' %>
+<div>
+    <%= @comment.new_record? ? 'Add a comment' : 'Update your comment' %>
+    <%= form_for(@comment) do |c| %>
+        <div class="ui form">
+            <div class="field">
+                <%= c.text_area :content, {size: "60x2", required: "required"} %>
+            </div>
+
+            <% if @comment.new_record? %>
+                <%= c.button 'Add comment', :class=>"ui green button" %>
+            <% else %>
+                <%= c.button 'Update comment', :class=>"ui blue button" %>
+            <% end %>
+        </div>
+    <% end %>
+</div>

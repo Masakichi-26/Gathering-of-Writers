@@ -1,4 +1,6 @@
-<h1>Find a User</h1>
+<h1>Find a User
+    <%= render 'shared/back_button', path: friends_index_path %>
+</h1>
 
 <%= form_tag(users_search_path, :method => 'get') do %>
     <div class="ui fluid category search">

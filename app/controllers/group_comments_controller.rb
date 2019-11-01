@@ -5,25 +5,28 @@ class GroupCommentsController < ApplicationController
         @comment = GroupComment.new(group_comment_params)
         @comment.group_article_id = params[:group_article_id]
         @comment.user_id = current_user.id
+        authorize @comment
 
         # byebug
         if @comment.save
-            redirect_to group_article_path(@comment.group_article.group.name, @comment.group_article.title),
+            redirect_to group_article_path(@comment.group_article.group, @comment.group_article),
             flash: {success: 'Comment was created.'}
         else
             @article = GroupArticle.find(params[:group_article_id])
-            redirect_to group_article_path(@article)
+            byebug
+            redirect_to group_article_path(@article.group, @article)
         end
     end
 
     def edit 
         @article = GroupArticle.find(@comment.group_article_id)
+        @group = @article.group
     end
 
     def update
         @article = GroupArticle.find(@comment.group_article_id)
         if @comment.update(group_comment_params)
-            redirect_to group_article_path(@comment.group_article_id), flash: {success: 'Comment was updated.'}
+            redirect_to group_article_path(@article.group, @article), flash: {success: 'Comment was updated.'}
         else
             render action: 'edit'
         end
@@ -33,7 +36,7 @@ class GroupCommentsController < ApplicationController
         @article = @comment.group_article
         if @comment
             @comment.destroy
-            redirect_to group_article_path(@article.group.name, @article.title), flash: {success: "Comment was deleted."}
+            redirect_to group_article_path(@article.group, @article), flash: {success: "Comment was deleted."}
         else
             render 'grouparticles/show'
         end
@@ -46,8 +49,8 @@ private
     end
 
     def set_group_comment
-        @comment = GroupComment.find(params[:group_comment_id])
-        # authorize @comment
+        @comment = GroupComment.find(params[:id])
+        authorize @comment
     end
 
 end

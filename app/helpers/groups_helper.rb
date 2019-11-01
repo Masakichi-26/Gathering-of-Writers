@@ -4,5 +4,8 @@ module GroupsHelper
         group.creator == current_user
     end
 
+    def current_group
+
+    end
 
 end

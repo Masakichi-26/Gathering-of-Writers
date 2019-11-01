@@ -1,21 +1,25 @@
-<h1><span class="user-info"><%= current_user.username %></span>'s Groups
+<h1><span class="user-info"><%= current_user.username %></span>'s Groups (<%= @groups.length %>)
     <% if logged_in? %>
         <span class="align-right">
-            <%= button_to "New Group", groups_new_path, :class=>"ui button green",
+            <%= button_to "New Group", new_group_path, :class=>"ui button green",
                 method: :get %>
         </span>
     <% end %>
 </h1>
 
-<ul>
-    <% if @groups %>
+
+<% if !@groups.empty? %>
+    <ul>
         <% @groups.each do |g| %>
             <div class="ui segment">
-            <%= link_to g.name, group_articles_path(g.name, group_id: g.id) %>
+            <%= link_to g.name, group_path(g) %>
             <span class="align-right">
                 Creator: <%= link_to g.creator.username, g.creator %>
             </span>
             </div>
         <% end %>
-    <% end %>
-</ul>
+    </ul>
+<% else %>
+    <div class="ui divider"></div>
+    <p>It looks like you aren't involved in any groups. Why not start one?</p>
+<% end %>

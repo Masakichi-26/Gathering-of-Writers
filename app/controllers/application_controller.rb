@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
   include SessionsHelper
   include GroupsHelper
+  include FriendRequestsHelper
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
@@ -13,4 +14,5 @@ private
     flash[:error] = "You are not authorized to perform this action."
     redirect_back fallback_location: root_path
   end
+
 end

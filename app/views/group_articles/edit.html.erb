@@ -1,2 +1,4 @@
-<h2>Edit this <%= @article.group.item_name %></h2>
-<%= render :partial => "articles/form" %>
+<h2>Edit this <%= @article.group.item_name %>
+    <%= render 'shared/back_button', path: group_article_path(@group, @article) %>
+</h2>
+<%= render :partial => "group_articles/form" %>

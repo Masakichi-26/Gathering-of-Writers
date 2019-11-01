@@ -1,7 +1,7 @@
 <h1><span class="user-info"><%= @user.username %></span>'s Page
     <% if logged_in? && current_user == @user %>
         <span class="align-right">
-            <%= button_to "Edit Profile", user_edit_path(@user), :class=>"ui button blue",
+            <%= button_to "Edit Profile", edit_user_path(@user), :class=>"ui button blue",
                 method: :get %>
         </span>
     <% end %>

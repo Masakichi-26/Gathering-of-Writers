@@ -2,20 +2,21 @@
 <p>Enter your email and password to sign in.</p>
 
 <%= form_for(:session, url: login_path) do |f| %>
-    <div class="field">
-        <%= f.label :email %>
-        <%= f.email_field :email %>
-    </div>
+    <div class="ui form">
+        <div class="field">
+            <%= f.label :email %>
+            <%= f.email_field :email %>
+        </div>
 
-    <div class="field">
-        <%= f.label :password %>
-        <%= f.password_field :password %>
-    </div>
+        <div class="field">
+            <%= f.label :password %>
+            <%= f.password_field :password %>
+        </div>
 
-    <div class="field">
-    <%=     f.button 'Login', :class=>"ui blue button" %>
+        <div class="field">
+        <%=     f.button 'Login', :class=>"ui blue button" %>
+        </div>
     </div>
-
 <% end %>
-
-<p>Need to sign up first? <%= link_to "You can do that here.", users_new_path %></p>
+<br>
+<p>Need to sign up first? <%= link_to "You can do that here.", new_user_path %></p>

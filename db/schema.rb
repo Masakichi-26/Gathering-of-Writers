@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191028021509) do
+ActiveRecord::Schema.define(version: 20191031065045) do
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
@@ -82,6 +82,8 @@ ActiveRecord::Schema.define(version: 20191028021509) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "bio"
+    t.boolean "email_confirmed", default: false
+    t.string "confirm_token"
   end
 
   create_table "users_groups", id: false, force: :cascade do |t|

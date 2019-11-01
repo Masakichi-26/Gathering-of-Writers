@@ -1,12 +1,17 @@
-<h2><%= @article.title %></h2>
+<h2><%= @article.title %>
+    <%= render 'shared/back_button', path: articles_path %>
+</h2>
+
 
 <%= render partial: 'writtenby' %>
 
-<div class="article-body"><%= simple_format(@article.content) %></div>
-
+<br>
+<div class="article-body" style="white-space: pre-wrap;"><%= simple_format(@article.content) %></div>
+<br>
 <div class="ui divider"></div>
+
 <div>
-    Comments
+    <h4>Comments</h4>
     <ul>
         <% if @comments.any? %>
             <% @comments.each do |comment| %>

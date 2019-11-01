@@ -1,0 +1,12 @@
+Greetings, <%= @user.username %>
+===============================================
+
+Thank you for registering to Gathering of Writers.
+In order to confirm your registration, please follow the URL below.
+
+<%= confirm_email_user_url(@user.confirm_token) %>
+ 
+We look forward to seeing you on the site soon.
+
+Sincerely,
+Gathering of Writers

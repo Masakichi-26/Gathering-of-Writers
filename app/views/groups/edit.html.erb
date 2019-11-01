@@ -1,13 +1,15 @@
-<h1>Edit Group</h1>
+<h1>Edit Group
+    <%= render 'shared/back_button', path: group_path(@group) %>
+</h1>
 <p>Edit your group as you see fit.</p>
 
 <%= render 'shared/errors', obj: @group %>
 
-<%= form_for(@group, url: group_edit_path(@group.name, group_id: @group.id)) do |g| %>
+<%= form_for(@group) do |g| %>
     <div class="ui form">
         <div class="field">
             <%= g.label :name %>
-            <%= g.text_field :name, :placeholder=>"Give your group an easily recognizable name." %>
+            <%= g.text_field :name, :placeholder=>"Give your group an easily recognizable name.", :required=>"required" %>
         </div>
         <div class="field">
             <%= g.label :description %>
@@ -16,13 +18,13 @@
         <div class="field">
             <%= g.label :item_name, 'Counter for posts' %>
             <p>The term used to refer to posts made in the group. The default is "Article".</p>
-            <%= g.text_field :item_name, :value=>"Article", :placeholder=>'If blank, this will default to "Article"' %>
+            <%= g.text_field :item_name, :placeholder=>'If blank, this will default to "Article"' %>
         </div>
 
         <br>
 
         <div class="field">
-            <%= g.label :users, 'Friends to Include' %>
+            <%= g.label :users, 'Friends to Include (Up to 5)' %>
             <div class="ui divider"></div>
             <% if @friends %>
                 <% @friends.each do |f| %>
@@ -42,3 +44,6 @@
         </div>
     </div>
 <% end %>
+
+
+

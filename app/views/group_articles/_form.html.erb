@@ -1,11 +1,3 @@
-<h2>Create your <%= @group.item_name %>
-    <span class="align-right">
-        <%= link_to group_path(@group) do %>
-            <button class="ui gray button">Go back</button>
-        <% end %>
-    </span>
-</h2>
-
 
 <% if @article.errors.any? %>
     <div class="ui error message">
@@ -17,7 +9,7 @@
     </div>
 <% end %>
 
-<%= form_for(@article) do |form| %>
+<%= form_for(@article, url: group_article_path(@group, @article)) do |form| %>
     <div class="ui form">
         <div class="field">
             <%= form.label :title %>
@@ -29,7 +21,7 @@
             <%= form.text_area :content, {size: "60x10", placeholder: "Enter the contents of your article here"} %>
         </div>
 
-        <% if params[:action] == 'edit' %>
+        <% if params[:id] %>
             <%= form.button 'Update', :class=>"ui blue button" %>
         <% else %>
             <%= form.button 'Create', :class=>"ui green button" %>

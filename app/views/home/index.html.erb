@@ -1,7 +1,45 @@
-<h1>Home Page</h1>
+<h1 style="text-align: center;">Gathering of Writers - Home Page</h1>
 <% if logged_in? %>
-    <h3>Welcome, <span class="user-info"><%= current_user.username %></span></h3>
+    <h2 style="font-style: italic;">Welcome, <span class="user-info"><%= current_user.username %></span></h2>
 <% end %>
-<p>This is a website where you can make articles and comment on them. It's a work in progress.</p>
+
+
+<h3>What kind of place is Gathering of Writers?</h3>
+<div class="ui divider"></div>
+<p>This is a place for writers to come together and share their stories, 
+or write stories in groups with friends.
+Articles can be publicly viewed by anyone, but only registered users may create.
+In addition, registered users may create groups and share or write stories
+together with friends. Groups are small so everyone can be involved more easily.
+</p>
+
+<br>
+
+<h3>About contacting us</h3>
+<div class="ui divider"></div>
+<p>This site was made using Ruby on Rails. If you notice anything wrong with the functionality 
+of the site, please contact at <a href="#">gatheringofwriters@gmail.com</a>.
+You are also welcome to send ideas, comments, or questions regarding the site. 
+However, there is no guarantee that your idea will be implemented on this site, 
+or that a bug can be fixed in a timely manner.
+Security has been tested, but as with any site, there may be overlooked loopholes. 
+If you find any, please be kind enough to report them to the above email.
+</p>
+
+<br>
+
+<h4>Disclaimer</h4>
+<div class="ui divider"></div>
+<p>The views and opinions expressed on this site belong solely to the individual authors, 
+and are not endorsed or represented by any other entity. 
+</p>
+<p>This site is a work in progress and a chance for someone to learn Ruby on Rails. 
+We do not verify that any information on this site is accurate or reliable.
+Any action you take on this website is at your own risk, and we will not be liable 
+for any damages or losses incurred by using this site.</p>
+<p>Please do not post anything related to the following topics, as it will most likely
+lead to forced removal: sexually explicit content, content promoting violence or bodily harm,
+hate speech or discriminatory language, illegal or unethical behavior, content in violation 
+of any applicable laws, and any other harmful or otherwise inappropriate content.</p>
 
 

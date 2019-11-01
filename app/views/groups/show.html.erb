@@ -1,33 +1,40 @@
 <h1>
     <%= @group.name %>
-    <span class="align-right">
-        <%= button_to 'New', group_articles_new_path, method: :get, :class=>"ui button green",
-            params: {action: 'create'} %>
-    </span>
+    <%= render 'shared/back_button', path: groups_path %>
     <% if is_creator?(@group) %>
         <span class="align-right">
-            <%= button_to 'Edit', group_edit_path, method: :get, :class=>"ui button blue",
+            <%= button_to 'Edit', edit_group_path, method: :get, :class=>"ui button blue",
                 params: {group_id: @group.id}  %>
         </span>
-    <% end %>
+    <% end %> 
 </h1>
 
-<p>This group was created by <%= link_to @group.creator.username, @group.creator %> on <%= @group.created_at.strftime("%B %-d, %Y") %></p>
+<p>This group was created by <%= link_to @group.creator.username, @group.creator %> on 
+    <%= @group.created_at.strftime("%B %-d, %Y") %>
+</p>
 
 <div class="ui piled segment">
   <h4 class="ui header">Description</h4>
     <p><%= simple_format(@group.description) %></p>
 </div>
+
 <div class="ui divider"></div>
 
-<h3><%= @group.item_name %> List</h3>
+<h3><%= @group.item_name %> List (<%= @group.group_articles.length %>)
+    <span class="align-right">
+        <%= button_to 'New', new_group_article_path(@group), method: :get, :class=>"ui button green",
+            params: {action: 'create'} %>
+    </span>
+</h3>
+
+<div style="height:1px;font-size:1px;"></div>
 
 <ul>
     <div class="ui divider"></div>
     <% if @articles %>
         <% @articles.each do |a| %>
             <li>
-                <%= link_to(a.title, group_article_path(@group.name, a.title)) %>
+                <%= link_to(a.title, group_article_path(@group, a)) %>
                 <span class="align-right">
                     <%= link_to a.user.username, a.user %>
                 </span>
@@ -37,9 +44,9 @@
     <% end %>
 </ul>
 
-<div class="ui divider"></div>
+<div style="height:1px;font-size:1px;"></div>
 
-<h3>Group Members</h3>
+<h3>Group Members (<%= @group.users.length %>)</h3>
 
 <ul>
     <div class="ui divider"></div>
@@ -50,3 +57,17 @@
         <div class="ui divider"></div>
     <% end %>
 </ul>
+
+<div style="height:1px;font-size:1px;"></div>
+
+<% if is_creator?(@group) %>
+    <h3>Manage the Group</h3>
+    <div class="ui divider"></div>
+    <%= button_to 'Delete this group', group_path(@group), method: :delete, :class=>"ui button red",
+        data: {confirm: 'Are you sure you would like to delete this group? All articles and comments associated with this group will be destroyed. This action cannot be undone.'}  %>
+<% else %>
+    <h3>Manage your status in this group</h3>
+    <div class="ui divider"></div>
+    <%= button_to 'Leave this group', leave_group_path(@group), method: :delete, :class=>"ui button red",
+        data: {confirm: 'Are you sure you would like to leave this group? You will no longer be able to participate in this group. This action cannot be undone.'}  %>
+<% end %>

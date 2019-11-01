@@ -1,2 +1,4 @@
-<h2>Edit this Article</h2>
+<h2>Edit this Article
+    <%= render 'shared/back_button', path: article_path(@article) %>
+</h2>
 <%= render :partial => "form" %>

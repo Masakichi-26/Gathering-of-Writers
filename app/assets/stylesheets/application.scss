@@ -22,7 +22,7 @@
 
  .align-right {
     //  text-align: right;
-     float: right;
+    float: right;
  }
 
  .left-adjustment {
@@ -41,9 +41,27 @@
 
  .top-padding {
      position: relative;
-     top: 10px;
+     top: 15px;
  }
 
  .right-padding {
     padding-right: 10px;
 }
+
+ .friend-request-count {
+     position: absolute;
+     left: 70px;
+     top: 127px;
+ }
+
+ .word-wrap {
+    word-wrap: break-word;
+ }
+
+ @media (min-height: 320px) {
+    .ui.footer.form-page { /* Increased specificity for SO snippet priority */
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
+  }

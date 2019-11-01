@@ -1,14 +1,19 @@
-<h1><span class="user-info"><%= current_user.username %>'s</span> Friends
+<h2><span class="user-info"><%= current_user.username %>'s</span> Friends
     (<%= @friends.length %>)
-    <span class="align-right">
-        <%= button_to "Friend Requests", friend_requests_path, :class=>"ui button blue",
-            method: :get %>
-    </span>
-    <span class="align-right">
-        <%= button_to "Search Users", users_search_path, :class=>"ui button gray",
-            method: :get, params: { search: '' } %>
-    </span>
-</h1>
+</h2>
+
+<span class="align-right" style="position: relative;">
+    <%= button_to "Friend Requests", friend_requests_path, :class=>"ui button blue",
+        method: :get %>
+    <% if friend_request_count > 0 %>
+        <div class="ui floating red label"><%= friend_request_count %></div>
+    <% end %>
+</span>
+<span class="align-right">
+    <%= button_to "Search Users", users_search_path, :class=>"ui button gray",
+        method: :get, params: { search: '' } %>
+</span>
+<br><br>
 
 <%= render 'users/userlist', obj: @friends %>
 

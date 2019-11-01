@@ -1,23 +1,5 @@
 class GroupArticlePolicy < ApplicationPolicy
 
-    # class Scope < Scope
-    #     def resolve
-    #         scope.where(user_id: user.id)
-    #     end
-    # end
-
-    def show_group?
-        if !user
-            return false
-        else 
-            if record.users.find_by(id: user.id)
-                return true
-            else
-                return false
-            end
-        end
-    end
-
     def create?
         user
     end
@@ -40,6 +22,18 @@ class GroupArticlePolicy < ApplicationPolicy
 
     def destroy?
         record.user_id == user.id
+    end
+
+    def show?
+        if !user
+            return false
+        else 
+            if record.group.users.find_by(id: user.id)
+                return true
+            else
+                return false
+            end
+        end
     end
 
 end
