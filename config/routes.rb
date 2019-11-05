@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
-  get 'friends/index'
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+  # mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  # devise_for :user 
+  
+  get 'friends', to: 'friends#index'
   get 'users/search', to: 'users#search'
   delete 'friends/destroy'
 
-  resources :friend_requests
+  resources :friend_requests, except: [:show, :edit, :new]
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
@@ -17,14 +22,6 @@ Rails.application.routes.draw do
   patch 'articles/:id', to: 'articles#update'
   delete 'articles/:id', to: 'articles#destroy'
   get 'articles/:id/edit', to: 'articles#edit', as: 'article_edit'
-  
-
-  # get 'users/new', to: 'users#new'
-  # post 'users/new', to: 'users#create'
-  # get 'users/:id/edit', to: 'users#edit', as: 'user_edit'
-  # patch 'users/:id/edit', to: 'users#update'
-  # delete 'users/destroy', to: 'users#destroy'
-  # get 'users/:id', to: 'users#show', as: 'user'
 
   resources :users, except: [:index] do 
     member do

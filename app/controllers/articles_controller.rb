@@ -8,7 +8,7 @@ class ArticlesController < ApplicationController
     end
 
     def show
-        @user = User.find_by(id: @article.user_id)
+        @user = User.find_by_id(@article.user_id)
         @comment = Comment.new
         @comments = Comment.where(article_id: params[:id]).includes(:user)
     end

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Practice2</title>
+    <title>Gathering of Writers</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -18,7 +18,7 @@
         <%= link_to '<i class="icon address card"></i>Profile'.html_safe, current_user, :class=>"item"%>
 
         <%= link_to '<i class="icon user circle"></i>Friends'.html_safe, 
-          friends_index_path, :class=>"item" %>
+          friends_path, :class=>"item" %>
         <% if friend_request_count > 0 %>
           <div class="friend-request-count">
             <div class="ui red label"><%= friend_request_count %></div>

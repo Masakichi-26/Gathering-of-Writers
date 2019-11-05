@@ -28,7 +28,7 @@ class GroupsController < ApplicationController
             end
 
             params[:friends].each do |f| 
-                @group.users << User.find_by(username: f)
+                @group.users << User.find_by_username(f)
             end
         end
 
@@ -43,12 +43,9 @@ class GroupsController < ApplicationController
     def index
         @groups = current_user.groups.includes(:creator)
         authorize @groups
-        # byebug
     end
 
     def show
-        # byebug
-        # @group = Group.find_by(name: params[:name])
         @articles = @group.group_articles.includes(:user)
     end
 
@@ -84,8 +81,8 @@ class GroupsController < ApplicationController
             end
 
             params[:friends].each do |f|
-                if !@group.users.find_by(username: f)
-                    @users_to_add << User.find_by(username: f)
+                if !@group.users.find_by_username(f)
+                    @users_to_add << User.find_by_username(f)
                 end
             end
         end 

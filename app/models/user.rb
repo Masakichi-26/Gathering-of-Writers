@@ -19,8 +19,8 @@ class User < ApplicationRecord
     
     has_secure_password
 
-    has_many :articles
-    has_many :comments
+    has_many :articles, dependent: :destroy
+    has_many :comments, dependent: :destroy
     has_many :friend_requests, dependent: :destroy
     has_many :pending_friends, through: :friend_requests, source: :friend
 

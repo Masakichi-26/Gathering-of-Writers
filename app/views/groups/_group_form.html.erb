@@ -2,7 +2,8 @@
     <div class="ui form">
         <div class="field">
             <%= g.label :name %>
-            <%= g.text_field :name, :placeholder=>"Give your group an easily recognizable name." %>
+            <%= g.text_field :name, :placeholder=>"Give your group an easily recognizable name.",
+                autofocus: true %>
         </div>
         <div class="field">
             <%= g.label :description %>

@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 	before_action :params_search_blank?, only: [:search]
 	before_action :set_user, only: [:edit, :update, :show, :destroy, 
 		:change_password, :change_password_confirm]
+	before_action :authorize_user, only: [:new, :create, :search]
 
 	def new
 		@user = User.new
@@ -23,7 +24,6 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		# params[:user].delete(:password) if params[:user][:password].blank?
 		if @user.update(user_params)
 			redirect_to @user, flash: {success: "Profile was updated."}
 		else
@@ -42,9 +42,9 @@ class UsersController < ApplicationController
 		end
 
 		if @pending 
-			@friend_request = current_user.friend_requests.find_by(friend_id: @user.id)
+			@friend_request = current_user.friend_requests.find_by_friend_id(@user.id)
 		elsif @received
-			@friend_request = @user.friend_requests.find_by(friend_id: current_user.id)
+			@friend_request = @user.friend_requests.find_by_friend_id(current_user.id)
 		end
 	end
 
@@ -119,7 +119,12 @@ private
 	end
 
 	def set_user
-		@user = User.find(params[:id])
+		@user = User.find_by_id(params[:id])
+		authorize @user
 	end
+
+	def authorize_user
+        authorize User
+    end
 
 end

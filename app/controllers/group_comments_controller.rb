@@ -7,7 +7,6 @@ class GroupCommentsController < ApplicationController
         @comment.user_id = current_user.id
         authorize @comment
 
-        # byebug
         if @comment.save
             redirect_to group_article_path(@comment.group_article.group, @comment.group_article),
             flash: {success: 'Comment was created.'}

@@ -9,10 +9,9 @@ class GroupArticlesController < ApplicationController
     end
 
     def show
-        @user = User.find_by(id: @article.user_id)
+        @user = User.find_by_id(@article.user_id)
         @comment = GroupComment.new
         @comments = GroupComment.where(group_article_id: @article.id).includes(:user, :group_article)
-        # byebug
     end
 
     def new
@@ -60,25 +59,12 @@ private
     end
 
     def set_group
-        @group = Group.find_by(id: params[:group_id])
-        # if !@group
-        #     byebug
-        #     @group = Group.find_by(name: params[:name])
-        # end
-        
-        # if @group
-            authorize @group, :show_group?
-        # end
+        @group = Group.find_by_id(params[:group_id])
+        authorize @group, :show_group?
     end
 
     def set_group_article
-        # @article = nil
-        # if @group == nil
-        #     @article = GroupArticle.find_by(title: params[:title])
-        # else 
-            @article = GroupArticle.find_by(id: params[:id])
-        # end
-
+        @article = GroupArticle.find_by_id(params[:id])
         authorize @article
     end    
 

@@ -1,5 +1,6 @@
 class FriendRequestsController < ApplicationController
-    before_action :set_friend_request, except: [:index, :create]
+    before_action :set_friend_request, only: [:update, :destroy]
+    before_action :authorize_friend_request, only: [:index, :create]
 
     def index
         @incoming = FriendRequest.where(friend: current_user).includes(:user)
@@ -7,9 +8,6 @@ class FriendRequestsController < ApplicationController
         @outgoing = FriendRequest.where(user: current_user).includes(:friend)
     end
 
-    def show 
-
-    end
 
     def create
         friend = User.find(params[:friend_id])
@@ -39,6 +37,11 @@ private
 
     def set_friend_request
         @friend_request = FriendRequest.find(params[:id])
+        authorize @friend_request
+    end
+
+    def authorize_friend_request
+        authorize FriendRequest
     end
 
 end
